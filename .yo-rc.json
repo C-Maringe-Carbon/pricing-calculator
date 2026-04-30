@@ -1,0 +1,12 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "isCreatingSolution": true,
+    "environment": "spo",
+    "version": "1.18.2",
+    "libraryName": "pricing-calculator",
+    "libraryId": "c8d42e47-3a15-4b8f-9e72-5f1d0a8c3b6e",
+    "packageManager": "npm",
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

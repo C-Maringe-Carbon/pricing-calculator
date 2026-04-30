@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "pricing-calculator-client-side-solution",
+    "id": "c8d42e47-3a15-4b8f-9e72-5f1d0a8c3b6e",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "Carbon Group",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": ""
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Compliance Services Calculator"
+      },
+      "longDescription": {
+        "default": "Carbon Group Compliance Services Calculator — connects to the PricingServices SharePoint list."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Services Calculator Feature",
+        "description": "Deploys the Services Calculator web part.",
+        "id": "d9e53f58-4b26-4c90-af83-602e1b9d4c7f",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/pricing-calculator.sppkg"
+  }
+}
