@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carbon Group — AI Committee</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg2:#f8f7f4;--bg3:#f1efe8;
+  --text:#1a1a18;--text2:#5f5e5a;--text3:#888780;
+  --border:#e0ddd5;--border2:#ccc9c0;
+  --p1:#185fa5;--p1l:#e6f1fb;--p1b:#85b7eb;
+  --p2:#0f6e56;--p2l:#e1f5ee;--p2b:#5dcaa5;
+  --p3:#7b3fa0;--p3l:#f3eafe;--p3b:#c49de0;
+  --p4:#ba7517;--p4l:#faeeda;--p4b:#fac775;
+  --navy:#042c53;--red:#a32d2d;--red-l:#fcebeb;--red-b:#f09595;
+  --radius:10px;--shadow:0 1px 4px rgba(0,0,0,.07);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg2);color:var(--text);min-height:100vh}
+.hdr{background:var(--navy);padding:18px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.hdr-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.hdr h1{font-size:20px;font-weight:500;color:#fff;line-height:1.2}
+.hdr .sub{font-size:13px;color:#93b8d8;margin-top:3px}
+.hdr-btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid transparent;transition:all .15s;font-family:inherit}
+.btn-white{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.25)}
+.btn-white:hover{background:rgba(255,255,255,.22)}
+.btn-green{background:var(--p2);color:#fff;border-color:var(--p2)}
+.btn-green:hover{filter:brightness(.9)}
+.btn-danger{background:var(--red-l);color:var(--red);border-color:var(--red-b)}
+.btn-sm{padding:5px 10px;font-size:12px}
+.edit-pill{background:var(--p4l);color:var(--p4);border:1px solid var(--p4b);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:500;display:none}
+.edit-pill.on{display:inline-block}
+.sp-badge{font-size:11px;padding:4px 12px;border-radius:20px;font-weight:500;white-space:nowrap;transition:all .4s;border:1px solid transparent;letter-spacing:.01em}
+.sp-connecting{background:rgba(255,255,255,.08);color:#fac775;border-color:rgba(250,199,117,.2)}
+.sp-connected{background:rgba(93,202,165,.12);color:#5dcaa5;border-color:rgba(93,202,165,.3)}
+.sp-saved{background:rgba(93,202,165,.2);color:#5dcaa5;border-color:rgba(93,202,165,.4)}
+.sp-saving{background:rgba(24,95,165,.15);color:#85b7eb;border-color:rgba(133,183,235,.3)}
+.sp-offline{background:rgba(255,255,255,.06);color:#93b8d8;border-color:rgba(255,255,255,.1)}
+.sp-error{background:rgba(163,45,45,.15);color:#f09595;border-color:rgba(163,45,45,.25)}
+.main{max-width:900px;margin:0 auto;padding:28px 24px}
+.tabs{display:flex;gap:4px;margin-bottom:24px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:4px}
+.tab{flex:1;padding:10px 8px;border:none;background:none;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;transition:all .15s;font-family:inherit;text-align:center}
+.tab.active{background:#fff;color:var(--text);box-shadow:var(--shadow)}
+.intro-box{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:24px;line-height:1.7}
+.intro-box p{font-size:13px;color:var(--text2);margin-bottom:8px}
+.intro-box p:last-child{margin-bottom:0}
+.intro-box strong{color:var(--text)}
+.pillars-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+@media(max-width:620px){.pillars-grid{grid-template-columns:1fr}}
+.pillar-card{background:#fff;border-radius:var(--radius);border:2px solid var(--border);overflow:hidden;box-shadow:var(--shadow)}
+.pillar-head{padding:16px 18px;border-bottom:1px solid var(--border)}
+.pillar-num{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px}
+.pillar-title{font-size:16px;font-weight:500;margin-bottom:6px}
+.pillar-champion{font-size:12px;color:var(--text2)}
+.pillar-champion span{font-weight:500}
+.champion-edit{font-size:12px;padding:4px 8px;border:1px solid var(--border2);border-radius:6px;font-family:inherit;background:var(--bg2);color:var(--text);width:180px}
+.pillar-body{padding:14px 18px}
+.pillar-desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px}
+.pillar-desc textarea{width:100%;min-height:70px;font-size:13px;border:1px solid var(--border2);border-radius:6px;padding:7px;resize:vertical;font-family:inherit;color:var(--text);background:var(--bg2)}
+.task-count{font-size:12px;font-weight:500;padding:3px 10px;border-radius:12px;display:inline-block}
+.p1 .pillar-head{background:var(--p1l);border-bottom-color:var(--p1b)}
+.p1 .pillar-num,.p1 .pillar-title{color:var(--p1)}
+.p1 .task-count{background:var(--p1l);color:var(--p1)}
+.p1{border-color:var(--p1b)}
+.p2 .pillar-head{background:var(--p2l);border-bottom-color:var(--p2b)}
+.p2 .pillar-num,.p2 .pillar-title{color:var(--p2)}
+.p2 .task-count{background:var(--p2l);color:var(--p2)}
+.p2{border-color:var(--p2b)}
+.p3 .pillar-head{background:var(--p3l);border-bottom-color:var(--p3b)}
+.p3 .pillar-num,.p3 .pillar-title{color:var(--p3)}
+.p3 .task-count{background:var(--p3l);color:var(--p3)}
+.p3{border-color:var(--p3b)}
+.p4 .pillar-head{background:var(--p4l);border-bottom-color:var(--p4b)}
+.p4 .pillar-num,.p4 .pillar-title{color:var(--p4)}
+.p4 .task-count{background:var(--p4l);color:var(--p4)}
+.p4{border-color:var(--p4b)}
+.agenda-wrap{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;box-shadow:var(--shadow)}
+.agenda-hdr{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.agenda-hdr h2{font-size:16px;font-weight:500;flex:1}
+.agenda-meta{font-size:12px;color:var(--text3)}
+.agenda-item{border-bottom:1px solid var(--border)}
+.agenda-item:last-child{border-bottom:none}
+.agenda-item-hdr{padding:14px 20px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .12s}
+.agenda-item-hdr:hover{background:var(--bg2)}
+.ai-num{font-size:13px;font-weight:600;width:28px;flex-shrink:0}
+.ai-time{font-size:12px;color:var(--text3);width:56px;flex-shrink:0}
+.ai-title{font-size:14px;font-weight:500;flex:1}
+.ai-tag{font-size:11px;font-weight:500;padding:2px 9px;border-radius:12px;border:1px solid transparent;white-space:nowrap}
+.ai-toggle{font-size:11px;color:var(--text3);white-space:nowrap}
+.agenda-body{padding:14px 20px 18px 60px;display:none;border-top:1px solid var(--border);background:var(--bg2)}
+.agenda-body.open{display:block}
+.agenda-body ul{padding-left:18px}
+.agenda-body li{font-size:13px;color:var(--text2);margin-bottom:6px;line-height:1.6}
+.agenda-body .note{font-size:12px;color:var(--text3);margin-top:10px;font-style:italic}
+.tag-p1{background:var(--p1l);color:var(--p1);border-color:var(--p1b)}
+.tag-p2{background:var(--p2l);color:var(--p2);border-color:var(--p2b)}
+.tag-p3{background:var(--p3l);color:var(--p3);border-color:var(--p3b)}
+.tag-p4{background:var(--p4l);color:var(--p4);border-color:var(--p4b)}
+.tag-all{background:var(--bg3);color:var(--text2);border-color:var(--border2)}
+.tasks-view{margin-bottom:20px}
+.pillar-section{background:#fff;border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.pillar-section-hdr{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;cursor:pointer}
+.pillar-section-hdr:hover{filter:brightness(.98)}
+.ps-title{font-size:15px;font-weight:500;flex:1}
+.ps-toggle{font-size:12px;color:var(--text3);font-weight:500}
+.ps-body{display:none;padding:0}
+.ps-body.open{display:block}
+.proj-group{border-bottom:1px solid var(--border);padding:14px 18px}
+.proj-group:last-child{border-bottom:none}
+.proj-group-title{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.phase-chip{font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;background:var(--bg3);color:var(--text2);border:1px solid var(--border2)}
+.task-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px dashed var(--border)}
+.task-item:last-child{border-bottom:none}
+.task-cb{accent-color:var(--p2);width:15px;height:15px;margin-top:2px;flex-shrink:0;cursor:pointer}
+.task-text{font-size:13px;color:var(--text);line-height:1.5;flex:1}
+.task-text.done{text-decoration:line-through;color:var(--text3)}
+.task-text input{width:100%;font-size:13px;border:1px solid var(--border2);border-radius:6px;padding:4px 8px;font-family:inherit;background:var(--bg2);color:var(--text)}
+.task-del{background:none;border:none;cursor:pointer;color:var(--text3);font-size:15px;padding:0 2px;flex-shrink:0}
+.task-del:hover{color:var(--red)}
+.task-add-row{display:flex;gap:8px;margin-top:10px}
+.task-add-row input{flex:1;padding:7px 12px;font-size:13px;border:1px solid var(--border2);border-radius:8px;font-family:inherit;background:var(--bg2);color:var(--text)}
+.prog-wrap{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:24px}
+.prog-title{font-size:14px;font-weight:500;margin-bottom:14px}
+.prog-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.prog-row:last-child{margin-bottom:0}
+.prog-label{font-size:12px;font-weight:500;width:210px;flex-shrink:0}
+.prog-bar-bg{flex:1;height:8px;border-radius:4px;background:var(--bg3);overflow:hidden}
+.prog-bar-fill{height:100%;border-radius:4px;transition:width .4s}
+.prog-pct{font-size:12px;color:var(--text3);width:80px;text-align:right;flex-shrink:0}
+.form-row{margin-bottom:12px}
+.form-row label{font-size:12px;font-weight:500;color:var(--text2);display:block;margin-bottom:4px}
+.form-row input,.form-row select,.form-row textarea{width:100%;padding:8px 12px;font-size:13px;border:1px solid var(--border2);border-radius:8px;font-family:inherit;background:var(--bg2);color:var(--text)}
+.form-row textarea{min-height:70px;resize:vertical;line-height:1.6}
+.form-actions{display:flex;gap:8px;flex-wrap:wrap}
+.add-proj-form{border:1.5px solid var(--p2b);border-radius:var(--radius);padding:16px;margin-top:8px;display:none;background:var(--bg)}
+.add-proj-form.open{display:block}
+.add-btn{width:100%;border:2px dashed var(--border2);background:none;border-radius:8px;padding:10px;font-size:13px;color:var(--text3);cursor:pointer;font-family:inherit;transition:all .15s;margin-top:8px}
+.add-btn:hover{border-color:var(--p2);color:var(--p2);background:var(--p2l)}
+.footer{border-top:1px solid var(--border);padding-top:16px;margin-top:8px;font-size:12px;color:var(--text3);line-height:1.8}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-inner">
+    <div>
+      <h1>Carbon Group — AI Committee</h1>
+      <div class="sub">4 Pillars · Monthly Meetings · Living Roadmap</div>
+    </div>
+    <div id="spStatus" class="sp-badge sp-offline">&#9675; Local</div>
+    <div class="hdr-btns">
+      <span class="edit-pill" id="editPill">Editing</span>
+      <button class="btn btn-white" id="btnSync" title="Reload from SharePoint list">&#8635; Sync</button>
+      <button class="btn btn-white" id="btnEdit"><span id="editLbl">&#9998; Enable editing</span></button>
+      <button class="btn btn-green" id="btnExport">&#11015; Export HTML</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="tabs">
+    <button class="tab active" id="tab-overview" data-tab="overview">Overview &amp; Pillars</button>
+    <button class="tab" id="tab-agenda" data-tab="agenda">Monthly Agenda</button>
+    <button class="tab" id="tab-tasks" data-tab="tasks">Tasks by Pillar</button>
+  </div>
+
+  <div id="view-overview">
+    <div class="intro-box">
+      <p><strong>Purpose:</strong> This committee exists to coordinate Carbon Group's AI transformation across four structured pillars. Each pillar has a champion who owns delivery, reports monthly to the group, and works with Nathan (and others who choose to be involved) between meetings.</p>
+      <p><strong>Meeting cadence:</strong> Monthly. Each champion presents their pillar's progress, blockers, and next steps. Attendance between meetings is optional but encouraged. Nathan is available to all champions between sessions.</p>
+      <p><strong>How it works:</strong> All AI projects from the roadmap have been re-mapped into the four pillars below. Champions own their pillar — not Nathan. If you are unsure of the vision for any task, re-read Nathan's notes or ask before building.</p>
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-title">Overall progress by pillar</div>
+      <div id="progressBars"></div>
+    </div>
+    <div class="pillars-grid" id="pillarCards"></div>
+  </div>
+
+  <div id="view-agenda" class="hidden">
+    <div class="intro-box">
+      <p><strong>Standard monthly agenda</strong> — each meeting runs approximately 90 minutes. The structure below is fixed; the content within each pillar section is updated by the champion before each meeting. Nathan opens and closes every meeting.</p>
+    </div>
+    <div class="agenda-wrap" id="agendaWrap"></div>
+  </div>
+
+  <div id="view-tasks" class="hidden">
+    <div class="intro-box">
+      <p><strong>All tasks from the roadmap, re-mapped into the four pillars.</strong> Champions use this view to track progress between meetings. Tick tasks as they are completed. Use edit mode to add new tasks or projects.</p>
+    </div>
+    <div class="tasks-view" id="tasksView"></div>
+  </div>
+
+  <div class="footer">
+    <strong>Document owner:</strong> Nathan (Carbon Group) &nbsp;&middot;&nbsp;
+    <strong>Meeting chair:</strong> Nathan &nbsp;&middot;&nbsp;
+    <strong>Cadence:</strong> Monthly &nbsp;&middot;&nbsp;
+    <strong>Questions:</strong> Raise with Nathan before proceeding
+  </div>
+</div>
+
+<script>
+// ── CONFIG ───────────────────────────────────────────────────────────────────
+var SP_LIST = 'AI_Committee';
+var PILLAR_COLORS = {
+  p1:{num:'Pillar 1',cls:'p1',bar:'#185fa5',tag:'tag-p1'},
+  p2:{num:'Pillar 2',cls:'p2',bar:'#0f6e56',tag:'tag-p2'},
+  p3:{num:'Pillar 3',cls:'p3',bar:'#7b3fa0',tag:'tag-p3'},
+  p4:{num:'Pillar 4',cls:'p4',bar:'#ba7517',tag:'tag-p4'}
+};
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+var editMode    = false;
+var activeTab   = 'overview';
+var spConnected = false;
+var _digest     = {v:'',exp:0};
+var _statusTimer = null;
+
+var pillars = [
+  {
+    id:'p1',title:'Dynamics CRM',champion:'TBD',
+    desc:'Build and configure Microsoft Dynamics as the single source of truth for all client data, job records, and communications. Everything else in the transformation depends on this foundation being correct.',
+    sectionOpen:true,
+    projects:[
+      {id:'pr1',title:'Dynamics CRM Build & Configuration',phase:'Month 1 — Foundation',tasks:[
+        {id:'t1',text:'Set up Dynamics sandbox environment',done:false},
+        {id:'t2',text:'Define and build the client record schema (entities, services, contacts, preferred window, goals)',done:false},
+        {id:'t3',text:'Map all entity types: company, trust, individual, SMSF — and configure accordingly',done:false},
+        {id:'t4',text:'Connect SharePoint/OneDrive as the document layer',done:false},
+        {id:'t5',text:'Define job record fields: job type, status, assigned staff, queries, deadlines, completion state',done:false},
+        {id:'t6',text:'Build the onboarding intake form (Content Snare equivalent — native to Dynamics)',done:false},
+        {id:'t7',text:'Test data flow: onboarding to client record to job record',done:false},
+        {id:'t8',text:'Define what job ready to start means as a system state',done:false}
+      ]},
+      {id:'pr2',title:'Client Data Audit & Migration',phase:'Month 1 — Foundation',tasks:[
+        {id:'t9',text:'Audit existing client records across all firms — what exists, where it lives, how clean it is',done:false},
+        {id:'t10',text:'Identify which clients have entity structure, preferred contact, and prior year documents accessible',done:false},
+        {id:'t11',text:'Define minimum data required per client for the Pre-Start Engine to function',done:false},
+        {id:'t12',text:'Build migration plan to move existing client data into Dynamics cleanly',done:false},
+        {id:'t13',text:'Identify clients who need to be contacted to fill in missing information',done:false},
+        {id:'t14',text:'Plan rollout sequence: which firms go first and in what order',done:false}
+      ]},
+      {id:'pr3',title:'Healthy, Wealthy & Wise — Dynamics Build',phase:'Month 3 — Advisory Layer',tasks:[
+        {id:'t15',text:'Build the Healthy, Wealthy & Wise intake form in Dynamics (digital, shareable with client)',done:false},
+        {id:'t16',text:'Configure separate completion for client and spouse/partner',done:false},
+        {id:'t17',text:'Build the goal tracking view: business, personal, and family goals — visible to the advisor',done:false},
+        {id:'t18',text:'Build the timeline view: 1yr, 3yr, 5yr, 10yr goals side by side',done:false},
+        {id:'t19',text:'Configure the shared board between advisor and client: both can see and update before meetings',done:false},
+        {id:'t20',text:'Build the action tracking system: actions from each meeting, assigned to client or advisor with due dates',done:false},
+        {id:'t21',text:'Make action status visible to both parties (like Planner in Teams)',done:false},
+        {id:'t22',text:'Build the meeting history log: what was discussed, decided, and what is outstanding',done:false},
+        {id:'t23',text:'Configure advisor prompts: system suggests follow-up points between meetings based on open actions',done:false},
+        {id:'t24',text:'Build cross-referral tracking and opportunity flag system',done:false},
+        {id:'t25',text:'Build the referral dashboard for partners: who has been referred, to which division, what was the result',done:false}
+      ]}
+    ]
+  },
+  {
+    id:'p2',title:'Process & System Automation',champion:'TBD',
+    desc:'Automate the end-to-end production workflow — from job scheduling and document collection through to client signing and lodgement. This pillar directly addresses the capacity constraint and eliminates the manual coordination burden on client managers.',
+    sectionOpen:true,
+    projects:[
+      {id:'pr4',title:'Job Scheduling Engine',phase:'Month 2 — Core Engine',tasks:[
+        {id:'t26',text:'Build the preferred completion window field into client onboarding',done:false},
+        {id:'t27',text:'Build the job scheduling logic: generate the next job instance based on services and window',done:false},
+        {id:'t28',text:'Configure the trigger: 30 days before window opens, automatically initiate the Pre-Start process',done:false},
+        {id:'t29',text:'Build the production calendar view: upcoming jobs, status, and assigned team members',done:false},
+        {id:'t30',text:'Configure alerts: notify pod leaders when a job has not been initiated within the trigger window',done:false},
+        {id:'t31',text:'Test scheduling logic across all job types and entity combinations',done:false},
+        {id:'t32',text:'For existing clients: backfill preferred window data and generate first scheduled jobs',done:false}
+      ]},
+      {id:'pr5',title:'AI-Generated Personalised Client Checklists',phase:'Month 2 — Core Engine',tasks:[
+        {id:'t33',text:'Build the checklist generation logic: map job type and entity type to required documents',done:false},
+        {id:'t34',text:'Integrate prior year data: pull what was requested and received last year',done:false},
+        {id:'t35',text:'Build the smart additions layer: flag known issues from prior year',done:false},
+        {id:'t36',text:'Design the client-facing checklist format — clear, simple, itemised',done:false},
+        {id:'t37',text:'Build the automated email/notification with deadline and window commitment language',done:false},
+        {id:'t38',text:'Test across: individual, company, trust, and SMSF combinations',done:false},
+        {id:'t39',text:'Build the response tracking system: log what has been received and what is outstanding',done:false}
+      ]},
+      {id:'pr6',title:'Client Query & Document Collection System',phase:'Month 2 — Core Engine',tasks:[
+        {id:'t40',text:'Build the query tracking system in Dynamics: each query is a record with status',done:false},
+        {id:'t41',text:'Build the document intake portal: clients upload via a link into SharePoint (not email)',done:false},
+        {id:'t42',text:'Configure automatic document tagging: linked to the relevant job and query',done:false},
+        {id:'t43',text:'Build the partial response logic: only resend unanswered queries',done:false},
+        {id:'t44',text:'Configure automatic reminders if no response after X days',done:false},
+        {id:'t45',text:'Build the job status update: all queries resolved means ready to start',done:false},
+        {id:'t46',text:'Build team notification: alert accountant when job moves to ready to start',done:false},
+        {id:'t47',text:'Ensure all responses are visible to team — not locked in one inbox',done:false},
+        {id:'t48',text:'Test full loop: send, respond, partial, follow up, complete, job unlocks',done:false}
+      ]},
+      {id:'pr7',title:'Pre-Start Validation Check',phase:'Month 2 — Core Engine',tasks:[
+        {id:'t49',text:'Build the pre-start validation logic: check all required documents against the checklist',done:false},
+        {id:'t50',text:'Cross-reference received documents against prior year requirements',done:false},
+        {id:'t51',text:'Flag any documents that appear missing or incomplete',done:false},
+        {id:'t52',text:'Generate a pre-start summary for the accountant: what we have, what is confirmed, any flags',done:false},
+        {id:'t53',text:'Block job from entering production queue until pre-start check is passed',done:false},
+        {id:'t54',text:'Build the override: allow pod leader to manually approve a job if there is a valid reason',done:false}
+      ]},
+      {id:'pr8',title:'Document Compilation, Signing & Client Output',phase:'Month 2-3 — Quality Layer',tasks:[
+        {id:'t55',text:'Build document compilation logic: bundle all job documents in correct order by entity type',done:false},
+        {id:'t56',text:'Build cover letter generator: summarise tax outcomes, refunds/payables, key points for the year',done:false},
+        {id:'t57',text:'Build the proactive insights section: flag payroll tax proximity, FBT, Div 7A, and other common issues',done:false},
+        {id:'t58',text:'Integrate signing infrastructure into our own stack (not a third-party cost)',done:false},
+        {id:'t59',text:'Configure multi-signature routing: different signatories for different entities in the same group',done:false},
+        {id:'t60',text:'Build the signing reminder system: automated reminders until all documents are signed',done:false},
+        {id:'t61',text:'Track signing status in Dynamics: visible to the full team',done:false},
+        {id:'t62',text:'Notify client manager when signing is complete and lodgement is ready',done:false}
+      ]},
+      {id:'pr9',title:'Quarterly Meeting & Advisory System',phase:'Month 3 — Advisory Layer',tasks:[
+        {id:'t63',text:'Build the quarterly meeting scheduler: automatically suggest meeting dates based on client preference',done:false},
+        {id:'t64',text:'Build the advisor prep dashboard: surfaces client goals, open actions, recent job outcomes, and flags',done:false},
+        {id:'t65',text:'Build the shared agenda tool: client and advisor can both add agenda items before the meeting',done:false},
+        {id:'t66',text:'Build the post-meeting summary: advisor logs key points, new actions are created and assigned',done:false},
+        {id:'t67',text:'Configure the follow-up prompt: advisor reminded to follow up on client actions between meetings',done:false},
+        {id:'t68',text:'Train all partners and pod leaders on the advisory model and how to run the meetings',done:false}
+      ]}
+    ]
+  },
+  {
+    id:'p3',title:'Integration with Government Agencies',champion:'TBD',
+    desc:'Build and maintain the connections between our systems and external government bodies — primarily the ATO — to enable automated lodgement, real-time status updates, and compliance monitoring. This pillar ensures that the automated production workflow can complete its final step without manual intervention.',
+    sectionOpen:true,
+    projects:[
+      {id:'pr10',title:'ATO Lodgement Automation',phase:'Month 2-3 — Quality Layer',tasks:[
+        {id:'t69',text:'Map all lodgement types: tax returns (individual, company, trust, SMSF), BAS, payroll, ASIC',done:false},
+        {id:'t70',text:'Define the trigger: once all signatures received, automatically prepare lodgement package',done:false},
+        {id:'t71',text:'Build the lodgement trigger in Dynamics: connects to ATO portal or intermediary',done:false},
+        {id:'t72',text:'Configure lodgement status tracking: pending, submitted, accepted, rejected — visible in Dynamics',done:false},
+        {id:'t73',text:'Build the error handling flow: if ATO rejects, flag to the relevant accountant with reason',done:false},
+        {id:'t74',text:'Build the lodgement confirmation notification: notify client and update job status to complete',done:false}
+      ]},
+      {id:'pr11',title:'ATO Compliance Monitoring & Debt Alerts',phase:'Month 3 — Advisory Layer',tasks:[
+        {id:'t75',text:'Build integration to pull ATO account balances and debt status per client',done:false},
+        {id:'t76',text:'Configure alerts: notify client manager when a client has an outstanding ATO debt or payment plan',done:false},
+        {id:'t77',text:'Surface ATO correspondence and notices into the client record in Dynamics',done:false},
+        {id:'t78',text:'Build the proactive client notification: alert clients to upcoming payment obligations before they are due',done:false}
+      ]},
+      {id:'pr12',title:'ASIC & Other Agency Integrations',phase:'Month 3 — Advisory Layer',tasks:[
+        {id:'t79',text:'Map all ASIC obligations per client: annual reviews, changes of officeholders, registered addresses',done:false},
+        {id:'t80',text:'Build automated ASIC annual review reminder and lodgement workflow',done:false},
+        {id:'t81',text:'Identify any other agency integrations required (state revenue offices, payroll tax portals)',done:false},
+        {id:'t82',text:'Build the compliance calendar: shows all upcoming lodgement deadlines across all agencies for all clients',done:false}
+      ]}
+    ]
+  },
+  {
+    id:'p4',title:'Technical Know-How',champion:'TBD',
+    desc:'Build the AI layer that assists with the actual production of accounting and bookkeeping work — reviewing work for accuracy, checking for the best tax outcome, and eventually drafting components of standard compliance work. This pillar is what frees local staff to become advisors rather than producers.',
+    sectionOpen:true,
+    projects:[
+      {id:'pr13',title:'Workflow Documentation — All Core Job Types',phase:'Month 1 — Foundation',tasks:[
+        {id:'t83',text:'Document the full workflow for: Individual Tax Return',done:false},
+        {id:'t84',text:'Document the full workflow for: Company Tax Return + Financials',done:false},
+        {id:'t85',text:'Document the full workflow for: Trust Tax Return + Financials',done:false},
+        {id:'t86',text:'Document the full workflow for: BAS Lodgement',done:false},
+        {id:'t87',text:'Document the full workflow for: SMSF Annual Return',done:false},
+        {id:'t88',text:'Document the full workflow for: Payroll processing',done:false},
+        {id:'t89',text:'For each job type: list every document required by entity type',done:false},
+        {id:'t90',text:'For each job type: define what complete information looks like before production starts',done:false},
+        {id:'t91',text:'For each job type: document the full review checklist (what reviewers currently check)',done:false},
+        {id:'t92',text:'Identify variations: what changes based on client complexity or special circumstances',done:false}
+      ]},
+      {id:'pr14',title:'AI First-Level Review System',phase:'Month 2-3 — Quality Layer',tasks:[
+        {id:'t93',text:'Define the first-level AI review checklist for each job type',done:false},
+        {id:'t94',text:'For tax returns: check figures reconcile, prior year comparisons within range, all entities included',done:false},
+        {id:'t95',text:'For financials: check balance sheet balances, P&L is complete, comparatives are correct',done:false},
+        {id:'t96',text:'For BAS: check GST figures reconcile to coding, period is correct, lodgement date noted',done:false},
+        {id:'t97',text:'Build the AI review layer: runs automatically when accountant marks job as complete',done:false},
+        {id:'t98',text:'Generate an AI review report: list of checks passed, any flags for human attention',done:false},
+        {id:'t99',text:'Build the workflow gate: job cannot go to human review until AI review is complete',done:false},
+        {id:'t100',text:'For tax compliance jobs: compare final outcome to tax planning engagement — flag if more than 5% variance',done:false},
+        {id:'t101',text:'Test AI review across all job types and validate accuracy with a senior accountant',done:false}
+      ]},
+      {id:'pr15',title:'Human Review Workflow (Technical + Commercial)',phase:'Month 2-3 — Quality Layer',tasks:[
+        {id:'t102',text:'Define the technical review checklist: accuracy, completeness, compliance',done:false},
+        {id:'t103',text:'Define the commercial review checklist: best tax position, missed opportunities, client flags',done:false},
+        {id:'t104',text:'Build the two-stage review workflow in Dynamics: technical, commercial, approved',done:false},
+        {id:'t105',text:'Configure routing: simple jobs go to client manager, complex jobs escalate to pod leader or partner',done:false},
+        {id:'t106',text:'Build the feedback loop: reviewer sends job back with specific comments, not just a general rejection',done:false},
+        {id:'t107',text:'Track review turnaround time: flag jobs sitting in review queue for more than X days',done:false},
+        {id:'t108',text:'Build the approval gate: job cannot be compiled for client until both reviews are complete',done:false}
+      ]},
+      {id:'pr16',title:'AI-Assisted Meeting Preparation & Cross-Referral Prompts',phase:'Month 3 — Advisory Layer',tasks:[
+        {id:'t109',text:'Configure AI-generated meeting prompts: based on Healthy, Wealthy & Wise data, suggest relevant topics',done:false},
+        {id:'t110',text:'Build the cross-referral prompt layer: surface opportunities to refer into other divisions based on client goals',done:false},
+        {id:'t111',text:'Build the gap analysis: which clients have only one service? Flag as expansion opportunities',done:false},
+        {id:'t112',text:'Build the revenue attribution model: track cross-referral revenue back to the originating advisor',done:false}
+      ]}
+    ]
+  }
+];
+
+var agendaItems = [
+  {num:'01',time:'5 min',title:'Welcome & Housekeeping',tag:'all',tagLabel:'All',
+   points:['Nathan opens the meeting','Confirm attendees and apologies','Any urgent items to add to the agenda'],
+   note:'Nathan chairs this section.'},
+  {num:'02',time:'5 min',title:'Previous Actions Review',tag:'all',tagLabel:'All',
+   points:['Review actions from last meeting','Confirm which are complete, in progress, or need to be carried forward','Any blockers to call out immediately'],
+   note:'Champions confirm their own actions. Keep this tight — detail goes in pillar sections.'},
+  {num:'03',time:'15 min',title:'Pillar 1: Dynamics CRM — Champion Presentation',tag:'p1',tagLabel:'Pillar 1: Dynamics',
+   points:['Progress update since last meeting (tasks completed, milestones hit)','Current blockers or decisions needed from the group','Work planned before next meeting','Any requests for Nathan or others to assist with'],
+   note:'Champion presents. Nathan and group ask questions. Agree on any actions before moving on.'},
+  {num:'04',time:'15 min',title:'Pillar 2: Process & System Automation — Champion Presentation',tag:'p2',tagLabel:'Pillar 2: Automation',
+   points:['Progress update since last meeting','Current blockers or decisions needed','Work planned before next meeting','Dependencies on other pillars (especially Dynamics)'],
+   note:'Champion presents. Flag any cross-pillar dependencies clearly.'},
+  {num:'05',time:'15 min',title:'Pillar 3: Government Agency Integration — Champion Presentation',tag:'p3',tagLabel:'Pillar 3: Government',
+   points:['Progress update since last meeting','ATO and ASIC integration status','Any regulatory or compliance considerations to flag','Work planned before next meeting'],
+   note:'Champion presents. Note that this pillar cannot fully proceed until Pillar 1 (Dynamics) has the job completion workflow in place.'},
+  {num:'06',time:'15 min',title:'Pillar 4: Technical Know-How — Champion Presentation',tag:'p4',tagLabel:'Pillar 4: Technical',
+   points:['Progress update since last meeting','Workflow documentation status','AI review build progress and accuracy results','Work planned before next meeting'],
+   note:'Champion presents. This pillar feeds directly into Pillar 2 — document review must precede automation.'},
+  {num:'07',time:'10 min',title:'Cross-Pillar Issues & Decisions',tag:'all',tagLabel:'All',
+   points:['Any issues that span multiple pillars','Decisions that require the full group','Resourcing or prioritisation changes','Escalations that need Nathan to decide'],
+   note:'Nathan facilitates. This is not a general discussion — it is for decisions only.'},
+  {num:'08',time:'5 min',title:'Actions & Next Meeting',tag:'all',tagLabel:'All',
+   points:['Confirm all actions: who, what, by when','Confirm date of next monthly meeting','Any between-meeting working sessions to schedule (optional, not compulsory)','Nathan closes the meeting'],
+   note:'Keep this section tight. Every action must have a named owner and a date.'}
+];
+
+// ── SP API ───────────────────────────────────────────────────────────────────
+function spUrl() {
+  // Set by the SPFx web part from TypeScript context (most reliable)
+  if (window._spSiteUrl) return window._spSiteUrl;
+  // Legacy SharePoint global
+  if (window._spPageContextInfo && window._spPageContextInfo.webAbsoluteUrl) {
+    return window._spPageContextInfo.webAbsoluteUrl;
+  }
+  // Detect from current URL when inside SharePoint
+  var loc = window.location.href;
+  if (loc.indexOf('.sharepoint.com') !== -1) {
+    var m = loc.match(/^(https?:\/\/[^\/]+\/sites\/[^\/]+)/);
+    if (m) return m[1];
+  }
+  return '';
+}
+
+function spGetDigest(cb) {
+  if (Date.now() < _digest.exp) { cb(null, _digest.v); return; }
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', spUrl() + '/_api/contextinfo', true);
+  xhr.setRequestHeader('Accept', 'application/json;odata=nometadata');
+  xhr.withCredentials = true;
+  xhr.onload = function() {
+    try {
+      var d = JSON.parse(xhr.responseText);
+      _digest.v = d.FormDigestValue;
+      _digest.exp = Date.now() + 1680000;
+      cb(null, _digest.v);
+    } catch(e) { cb(e); }
+  };
+  xhr.onerror = function() { cb(new Error('network')); };
+  xhr.send();
+}
+
+function spFetch(method, path, data, headers, cb) {
+  var xhr = new XMLHttpRequest();
+  xhr.open(method, spUrl() + path, true);
+  xhr.setRequestHeader('Accept', 'application/json;odata=nometadata');
+  xhr.setRequestHeader('Content-Type', 'application/json;odata=nometadata');
+  xhr.withCredentials = true;
+  if (headers) {
+    Object.keys(headers).forEach(function(k) { xhr.setRequestHeader(k, headers[k]); });
+  }
+  xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      var result = null;
+      try { result = JSON.parse(xhr.responseText); } catch(e) {}
+      cb(null, result);
+    } else {
+      cb(new Error('HTTP ' + xhr.status));
+    }
+  };
+  xhr.onerror = function()    { cb(new Error('network')); };
+  xhr.ontimeout = function()  { cb(new Error('timeout')); };
+  xhr.timeout = 12000;
+  xhr.send(data ? JSON.stringify(data) : null);
+}
+
+function spGet(path, cb) { spFetch('GET', path, null, null, cb); }
+
+function spMerge(id, data, cb) {
+  spGetDigest(function(err, dv) {
+    if (err) { if (cb) cb(err); return; }
+    spFetch('POST',
+      "/_api/web/lists/getbytitle('" + SP_LIST + "')/items(" + id + ")",
+      data,
+      {'X-RequestDigest': dv, 'X-HTTP-Method': 'MERGE', 'IF-MATCH': '*'},
+      cb || function() {}
+    );
+  });
+}
+
+function spCreate(data, cb) {
+  spGetDigest(function(err, dv) {
+    if (err) { if (cb) cb(err); return; }
+    spFetch('POST',
+      "/_api/web/lists/getbytitle('" + SP_LIST + "')/items",
+      data,
+      {'X-RequestDigest': dv},
+      function(e, r) { cb(e, r && r.Id); }
+    );
+  });
+}
+
+function spRemove(id, cb) {
+  spGetDigest(function(err, dv) {
+    if (err) { if (cb) cb(err); return; }
+    spFetch('POST',
+      "/_api/web/lists/getbytitle('" + SP_LIST + "')/items(" + id + ")",
+      null,
+      {'X-RequestDigest': dv, 'X-HTTP-Method': 'DELETE', 'IF-MATCH': '*'},
+      cb || function() {}
+    );
+  });
+}
+
+// ── BUILD FROM SP ITEMS ──────────────────────────────────────────────────────
+function buildFromItems(items) {
+  var pMap = {}, prMap = {};
+  var order = ['p1','p2','p3','p4'];
+  items.forEach(function(item) {
+    var pid = item.PillarID || 'p1';
+    if (!pMap[pid]) {
+      pMap[pid] = {id:pid, title:item.Pillar||pid, champion:item.PillarChampion||'TBD', desc:'', sectionOpen:true, projects:[]};
+    }
+    if (item.PillarChampion && item.PillarChampion !== 'TBD') pMap[pid].champion = item.PillarChampion;
+    var prKey = pid + '||' + item.Project;
+    if (!prMap[prKey]) {
+      var proj = {id:'pr_'+item.ProjectOrder, title:item.Project, phase:item.Phase||'', tasks:[]};
+      prMap[prKey] = proj;
+      pMap[pid].projects.push(proj);
+    }
+    prMap[prKey].tasks.push({id:'sp_'+item.Id, spId:item.Id, text:item.Title, done:!!item.Done});
+  });
+  order.forEach(function(pid) {
+    if (!pMap[pid]) return;
+    for (var li = 0; li < pillars.length; li++) {
+      if (pillars[li].id === pid) { pMap[pid].desc = pillars[li].desc; break; }
+    }
+  });
+  return order.filter(function(pid){ return !!pMap[pid]; }).map(function(pid){ return pMap[pid]; });
+}
+
+// ── STATUS ───────────────────────────────────────────────────────────────────
+function setStatus(cls, msg) {
+  var el = document.getElementById('spStatus');
+  if (!el) return;
+  el.className = 'sp-badge sp-' + cls;
+  el.textContent = msg;
+}
+function setSaved(msg) {
+  setStatus('saved', '✓ ' + (msg || 'Saved'));
+  clearTimeout(_statusTimer);
+  _statusTimer = setTimeout(function() { setStatus('connected', '● Connected · AI_Committee'); }, 2500);
+}
+
+// ── HELPERS ──────────────────────────────────────────────────────────────────
+function uid() { return 't' + Date.now() + Math.random().toString(36).slice(2,5); }
+function esc(s) {
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function pc(id) { return PILLAR_COLORS[id] || PILLAR_COLORS.p1; }
+function pillarIdx(id) { return ['p1','p2','p3','p4'].indexOf(id) + 1; }
+
+// ── TABS ─────────────────────────────────────────────────────────────────────
+function showTab(t) {
+  activeTab = t;
+  var ids = ['overview','agenda','tasks'];
+  for (var i = 0; i < ids.length; i++) {
+    var vEl = document.getElementById('view-' + ids[i]);
+    var tEl = document.getElementById('tab-' + ids[i]);
+    if (vEl) vEl.className = ids[i] !== t ? 'hidden' : '';
+    if (tEl) tEl.className = 'tab' + (ids[i] === t ? ' active' : '');
+  }
+  if (t === 'tasks')    renderTasks();
+  if (t === 'overview') renderOverview();
+  if (t === 'agenda')   renderAgenda();
+}
+
+// ── EDIT MODE ────────────────────────────────────────────────────────────────
+function toggleEdit() {
+  editMode = !editMode;
+  var lbl = document.getElementById('editLbl');
+  var pill = document.getElementById('editPill');
+  if (lbl)  lbl.textContent  = editMode ? '✎ Disable editing' : '✎ Enable editing';
+  if (pill) pill.className   = 'edit-pill' + (editMode ? ' on' : '');
+  renderAll();
+}
+
+// ── PROGRESS ─────────────────────────────────────────────────────────────────
+function renderProgress() {
+  var c = document.getElementById('progressBars');
+  if (!c) return;
+  var html = '';
+  for (var i = 0; i < pillars.length; i++) {
+    var pl = pillars[i];
+    var tasks = [];
+    for (var j = 0; j < pl.projects.length; j++) {
+      tasks = tasks.concat(pl.projects[j].tasks);
+    }
+    var done = 0;
+    for (var k = 0; k < tasks.length; k++) { if (tasks[k].done) done++; }
+    var total = tasks.length;
+    var pct = total ? Math.round(done/total*100) : 0;
+    var col = pc(pl.id).bar;
+    html += '<div class="prog-row">' +
+      '<div class="prog-label" style="color:'+col+';font-weight:500">'+esc(pl.title)+'</div>' +
+      '<div class="prog-bar-bg"><div class="prog-bar-fill" style="width:'+pct+'%;background:'+col+'"></div></div>' +
+      '<div class="prog-pct">'+done+'/'+total+' ('+pct+'%)</div>' +
+      '</div>';
+  }
+  c.innerHTML = html;
+}
+
+// ── OVERVIEW ──────────────────────────────────────────────────────────────────
+function renderOverview() {
+  renderProgress();
+  var c = document.getElementById('pillarCards');
+  if (!c) return;
+  var html = '';
+  for (var pi = 0; pi < pillars.length; pi++) {
+    var pl = pillars[pi];
+    var tasks = [];
+    for (var j = 0; j < pl.projects.length; j++) tasks = tasks.concat(pl.projects[j].tasks);
+    var done = 0;
+    for (var k = 0; k < tasks.length; k++) { if (tasks[k].done) done++; }
+    var col = pc(pl.id);
+    var champHtml = editMode
+      ? '<input class="champion-edit" value="'+esc(pl.champion)+'" data-action="champion-input" data-pi="'+pi+'" placeholder="Champion name...">'
+      : '<span>'+esc(pl.champion)+'</span>';
+    var descHtml = editMode
+      ? '<textarea class="pillar-desc" style="display:block" data-action="pillar-desc" data-pi="'+pi+'">'+esc(pl.desc)+'</textarea>'
+      : '<div class="pillar-desc">'+esc(pl.desc)+'</div>';
+    html +=
+      '<div class="pillar-card '+col.cls+'">' +
+        '<div class="pillar-head">' +
+          '<div class="pillar-num">'+col.num+'</div>' +
+          '<div class="pillar-title">'+esc(pl.title)+'</div>' +
+          '<div class="pillar-champion">Champion: '+champHtml+'</div>' +
+        '</div>' +
+        '<div class="pillar-body">' +
+          descHtml +
+          '<span class="task-count">'+done+'/'+tasks.length+' tasks complete</span>' +
+        '</div>' +
+      '</div>';
+  }
+  c.innerHTML = html;
+}
+
+// ── AGENDA ────────────────────────────────────────────────────────────────────
+function renderAgenda() {
+  var c = document.getElementById('agendaWrap');
+  if (!c) return;
+  var tagMap    = {all:'tag-all',p1:'tag-p1',p2:'tag-p2',p3:'tag-p3',p4:'tag-p4'};
+  var tagOpts   = ['all','p1','p2','p3','p4'];
+  var tagLabels = {all:'All',p1:'Pillar 1: Dynamics',p2:'Pillar 2: Automation',p3:'Pillar 3: Government',p4:'Pillar 4: Technical'};
+  var total = 0;
+  for (var ai = 0; ai < agendaItems.length; ai++) { var m = parseInt(agendaItems[ai].time); if (!isNaN(m)) total += m; }
+  var html = '<div class="agenda-hdr"><h2>Monthly AI Committee — Standard Agenda</h2><span class="agenda-meta">Total: ~'+total+' minutes</span></div>';
+
+  for (var i = 0; i < agendaItems.length; i++) {
+    var item = agendaItems[i];
+    var tagCls = tagMap[item.tag] || 'tag-all';
+
+    var numHtml = editMode
+      ? '<input style="width:36px;font-size:13px;font-weight:600;border:1px solid var(--border2);border-radius:5px;padding:2px 4px;font-family:inherit;background:var(--bg2);color:var(--text)" value="'+esc(item.num)+'" data-action="agenda-num" data-i="'+i+'">'
+      : '<span class="ai-num">'+esc(item.num)+'</span>';
+    var timeHtml = editMode
+      ? '<input style="width:64px;font-size:12px;border:1px solid var(--border2);border-radius:5px;padding:2px 4px;font-family:inherit;background:var(--bg2);color:var(--text3)" value="'+esc(item.time)+'" data-action="agenda-time" data-i="'+i+'">'
+      : '<span class="ai-time">'+esc(item.time)+'</span>';
+    var titleHtml = editMode
+      ? '<input style="flex:1;font-size:14px;font-weight:500;border:1px solid var(--border2);border-radius:5px;padding:3px 7px;font-family:inherit;background:var(--bg2);color:var(--text)" value="'+esc(item.title)+'" data-action="agenda-title" data-i="'+i+'">'
+      : '<span class="ai-title">'+esc(item.title)+'</span>';
+    var tagHtml = editMode
+      ? (function(ii, itag) {
+          var sel = '<select style="font-size:11px;border:1px solid var(--border2);border-radius:5px;padding:2px 5px;font-family:inherit;background:var(--bg2);color:var(--text2)" data-action="agenda-tag" data-i="'+ii+'">';
+          for (var oi = 0; oi < tagOpts.length; oi++) {
+            sel += '<option value="'+tagOpts[oi]+'"'+(itag===tagOpts[oi]?' selected':'')+'>'+tagLabels[tagOpts[oi]]+'</option>';
+          }
+          return sel + '</select>';
+        })(i, item.tag)
+      : '<span class="ai-tag '+tagCls+'">'+esc(item.tagLabel)+'</span>';
+    var delBtn = editMode ? '<button class="task-del" style="margin-left:4px" data-action="del-agenda-item" data-i="'+i+'" title="Delete">&#10005;</button>' : '';
+
+    var ptsHtml;
+    if (editMode) {
+      ptsHtml = '';
+      for (var pi2 = 0; pi2 < item.points.length; pi2++) {
+        ptsHtml += '<li style="display:flex;align-items:center;gap:6px;margin-bottom:6px">' +
+          '<input style="flex:1;font-size:13px;border:1px solid var(--border2);border-radius:5px;padding:4px 7px;font-family:inherit;background:var(--bg);color:var(--text)" value="'+esc(item.points[pi2])+'" data-action="agenda-point" data-i="'+i+'" data-pi="'+pi2+'">' +
+          '<button class="task-del" data-action="del-agenda-point" data-i="'+i+'" data-pi="'+pi2+'" title="Remove">&#10005;</button></li>';
+      }
+      ptsHtml += '<li style="margin-top:4px"><button class="add-btn" style="margin-top:0;padding:5px 10px;font-size:12px;width:auto" data-action="add-agenda-point" data-i="'+i+'">+ Add point</button></li>';
+    } else {
+      ptsHtml = '';
+      for (var pi3 = 0; pi3 < item.points.length; pi3++) {
+        ptsHtml += '<li>'+esc(item.points[pi3])+'</li>';
+      }
+    }
+
+    var noteHtml = editMode
+      ? '<div style="margin-top:10px"><label style="font-size:11px;color:var(--text3);font-weight:500">&#128204; Note</label><textarea style="width:100%;margin-top:4px;font-size:12px;border:1px solid var(--border2);border-radius:6px;padding:6px 8px;font-family:inherit;background:var(--bg);color:var(--text2);resize:vertical;min-height:48px" data-action="agenda-note" data-i="'+i+'">'+esc(item.note)+'</textarea></div>'
+      : '<p class="note">&#128204; '+esc(item.note)+'</p>';
+
+    html +=
+      '<div class="agenda-item">' +
+        '<div class="agenda-item-hdr"'+(editMode?' style="cursor:default;flex-wrap:wrap;gap:8px"':' data-action="toggle-agenda" data-i="'+i+'"')+'>' +
+          numHtml + timeHtml + titleHtml + tagHtml +
+          (editMode ? delBtn : '<span class="ai-toggle" id="ag-tog-'+i+'">&#9660; Detail</span>') +
+        '</div>' +
+        '<div class="agenda-body'+(editMode?' open':'')+'" id="ag-body-'+i+'">' +
+          '<ul style="'+(editMode?'list-style:none;padding-left:0':'padding-left:18px')+'">'+ptsHtml+'</ul>' +
+          noteHtml +
+        '</div>' +
+      '</div>';
+  }
+
+  if (editMode) {
+    html += '<div style="padding:12px 18px"><button class="add-btn" data-action="add-agenda-item">+ Add agenda item</button></div>';
+  }
+  c.innerHTML = html;
+}
+
+// ── TASKS ─────────────────────────────────────────────────────────────────────
+function renderTasks() {
+  var c = document.getElementById('tasksView');
+  if (!c) return;
+  var html = '';
+  for (var pi = 0; pi < pillars.length; pi++) {
+    var pl = pillars[pi];
+    var col = pc(pl.id);
+    var allTasks = [];
+    for (var pj = 0; pj < pl.projects.length; pj++) allTasks = allTasks.concat(pl.projects[pj].tasks);
+    var done = 0;
+    for (var dk = 0; dk < allTasks.length; dk++) { if (allTasks[dk].done) done++; }
+
+    var projs = '';
+    for (var pri = 0; pri < pl.projects.length; pri++) {
+      var pr = pl.projects[pri];
+      var taskRows = '';
+      for (var ti = 0; ti < pr.tasks.length; ti++) {
+        var t = pr.tasks[ti];
+        taskRows +=
+          '<div class="task-item">' +
+            '<input type="checkbox" class="task-cb"'+(t.done?' checked':'')+' data-action="toggle-task" data-pi="'+pi+'" data-pri="'+pri+'" data-ti="'+ti+'">' +
+            '<span class="task-text'+(t.done?' done':'')+'">'+
+              (editMode
+                ? '<input value="'+esc(t.text)+'" data-action="task-text" data-pi="'+pi+'" data-pri="'+pri+'" data-ti="'+ti+'">'
+                : esc(t.text)) +
+            '</span>' +
+            (editMode ? '<button class="task-del" data-action="del-task" data-pi="'+pi+'" data-pri="'+pri+'" data-ti="'+ti+'">&#10005;</button>' : '') +
+          '</div>';
+      }
+      var addRow = editMode
+        ? '<div class="task-add-row">' +
+            '<input type="text" data-action="new-task-input" data-pi="'+pi+'" data-pri="'+pri+'" data-prid="'+esc(pr.id)+'" placeholder="Add a new task...">' +
+            '<button class="btn btn-green btn-sm" data-action="add-task" data-pi="'+pi+'" data-pri="'+pri+'" data-prid="'+esc(pr.id)+'">Add</button>' +
+          '</div>'
+        : '';
+      projs +=
+        '<div class="proj-group">' +
+          '<div class="proj-group-title">' +
+            esc(pr.title) +
+            '<span class="phase-chip">'+esc(pr.phase)+'</span>' +
+            (editMode ? '<button class="btn btn-danger btn-sm" style="margin-left:auto" data-action="del-project" data-pi="'+pi+'" data-pri="'+pri+'">&#10005; Delete</button>' : '') +
+          '</div>' +
+          taskRows + addRow +
+        '</div>';
+    }
+
+    var addProjHtml = editMode
+      ? '<div style="padding:12px 18px">' +
+          '<button class="add-btn" data-action="toggle-add-proj" data-id="apf-'+pl.id+'">+ Add new project to this pillar</button>' +
+          '<div class="add-proj-form" id="apf-'+pl.id+'">' +
+            '<div style="font-size:14px;font-weight:500;margin-bottom:12px">New project</div>' +
+            '<div class="form-row"><label>Project title</label><input type="text" id="apf-t-'+pl.id+'" placeholder="Project title..."></div>' +
+            '<div class="form-row"><label>Phase / timeline</label><input type="text" id="apf-p-'+pl.id+'" placeholder="e.g. Month 2 — Core Engine"></div>' +
+            '<div class="form-actions">' +
+              '<button class="btn btn-green" data-action="add-project" data-pi="'+pi+'" data-plid="'+pl.id+'">Add project</button>' +
+              '<button class="btn btn-white" style="background:var(--bg3);color:var(--text2);border-color:var(--border2)" data-action="toggle-add-proj" data-id="apf-'+pl.id+'">Cancel</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      : '';
+
+    html +=
+      '<div class="pillar-section">' +
+        '<div class="pillar-section-hdr" data-action="toggle-pillar" data-pi="'+pi+'" style="background:'+col.bar+'15;border-bottom-color:'+col.bar+'40">' +
+          '<div class="ps-title" style="color:'+col.bar+'">'+esc(pl.title)+'</div>' +
+          '<span style="font-size:12px;color:'+col.bar+';margin-right:8px">'+done+'/'+allTasks.length+' complete</span>' +
+          '<span class="ps-toggle" id="pst-'+pi+'">&#9650; Collapse</span>' +
+        '</div>' +
+        '<div class="ps-body open" id="psb-'+pi+'">'+projs+addProjHtml+'</div>' +
+      '</div>';
+  }
+  c.innerHTML = html;
+}
+
+// ── SP ACTIONS ────────────────────────────────────────────────────────────────
+function toggleTask(pi, pri, ti) {
+  var task = pillars[pi].projects[pri].tasks[ti];
+  task.done = !task.done;
+  renderTasks();
+  renderProgress();
+  if (!spConnected || !task.spId) return;
+  setStatus('saving', '↑ Saving...');
+  spMerge(task.spId, {Done:task.done, CompletedDate:task.done?new Date().toISOString():null}, function(err) {
+    if (err) { setStatus('error', '✕ Save failed — try again'); return; }
+    setSaved(task.done ? 'Task completed' : 'Task reopened');
+  });
+}
+
+function saveChampion(pi) {
+  if (!spConnected) return;
+  var pl = pillars[pi];
+  var allTasks = [];
+  for (var j = 0; j < pl.projects.length; j++) allTasks = allTasks.concat(pl.projects[j].tasks);
+  var spTasks = [];
+  for (var k = 0; k < allTasks.length; k++) { if (allTasks[k].spId) spTasks.push(allTasks[k]); }
+  if (!spTasks.length) return;
+  setStatus('saving', '↑ Saving champion...');
+  var done = 0;
+  for (var si = 0; si < spTasks.length; si++) {
+    (function(t) {
+      spMerge(t.spId, {PillarChampion: pl.champion}, function(err) {
+        if (!err) done++;
+        if (done === spTasks.length) setSaved('Champion saved');
+      });
+    })(spTasks[si]);
+  }
+}
+
+function addTaskFromEl(pi, pri, prid) {
+  var inp = document.querySelector('[data-action="new-task-input"][data-prid="'+prid+'"]');
+  var txt = inp && inp.value && inp.value.trim();
+  if (!txt) return;
+  var pl = pillars[pi], pr = pl.projects[pri];
+  var newTask = {id:uid(), text:txt, done:false};
+  pr.tasks.push(newTask);
+  if (inp) inp.value = '';
+  renderTasks();
+  renderProgress();
+  if (!spConnected) return;
+  setStatus('saving', '↑ Adding task...');
+  spCreate({
+    Title:txt, Pillar:pl.title, PillarID:pl.id,
+    PillarOrder:pillarIdx(pl.id), PillarChampion:pl.champion,
+    Project:pr.title, Phase:pr.phase,
+    ProjectOrder:pri+1, TaskOrder:pr.tasks.length, Done:false
+  }, function(err, spId) {
+    if (err) { setStatus('error', '✕ Add failed — saved locally only'); return; }
+    newTask.spId = spId;
+    setSaved('Task added to list');
+  });
+}
+
+function delTask(pi, pri, ti) {
+  if (!confirm('Remove this task?')) return;
+  var task = pillars[pi].projects[pri].tasks[ti];
+  pillars[pi].projects[pri].tasks.splice(ti, 1);
+  renderTasks();
+  renderProgress();
+  if (!spConnected || !task.spId) return;
+  setStatus('saving', '↑ Deleting...');
+  spRemove(task.spId, function(err) {
+    if (err) { setStatus('error', '✕ Delete failed'); return; }
+    setSaved('Task deleted');
+  });
+}
+
+function delProject(pi, pri) {
+  var pr = pillars[pi].projects[pri];
+  if (!confirm('Delete "' + pr.title + '" and all its tasks?')) return;
+  var tasks = pr.tasks.slice();
+  pillars[pi].projects.splice(pri, 1);
+  renderTasks();
+  renderProgress();
+  if (!spConnected) return;
+  var spTasks = [];
+  for (var k = 0; k < tasks.length; k++) { if (tasks[k].spId) spTasks.push(tasks[k]); }
+  if (!spTasks.length) { setSaved('Project deleted'); return; }
+  setStatus('saving', '↑ Deleting project...');
+  var done = 0;
+  for (var si = 0; si < spTasks.length; si++) {
+    spRemove(spTasks[si].spId, function() {
+      done++;
+      if (done === spTasks.length) setSaved('Project deleted');
+    });
+  }
+}
+
+function addProject(pi, plid) {
+  var tEl = document.getElementById('apf-t-' + plid);
+  var pEl = document.getElementById('apf-p-' + plid);
+  var title = tEl && tEl.value && tEl.value.trim();
+  var phase = pEl && pEl.value && pEl.value.trim();
+  if (!title) { alert('Please enter a project title'); return; }
+  pillars[pi].projects.push({id:uid(), title:title, phase:phase||'', tasks:[]});
+  renderTasks();
+  renderProgress();
+}
+
+function togglePillarSection(pi) {
+  var b = document.getElementById('psb-' + pi);
+  var t = document.getElementById('pst-' + pi);
+  if (!b || !t) return;
+  var open = b.classList.toggle('open');
+  t.textContent = open ? '▲ Collapse' : '▼ Expand';
+}
+
+function toggleAddProj(id) {
+  var el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+function toggleAgenda(i) {
+  var b = document.getElementById('ag-body-' + i);
+  var t = document.getElementById('ag-tog-' + i);
+  if (!b || !t) return;
+  var open = b.classList.toggle('open');
+  t.textContent = open ? '▲ Hide' : '▼ Detail';
+}
+
+function addAgendaItem() {
+  var n = String(agendaItems.length + 1);
+  if (n.length < 2) n = '0' + n;
+  agendaItems.push({num:n, time:'5 min', title:'New agenda item', tag:'all', tagLabel:'All', points:['Add your points here'], note:'Add a note here.'});
+  renderAgenda();
+}
+function delAgendaItem(i)      { if (confirm('Remove this agenda item?')) { agendaItems.splice(i,1); renderAgenda(); } }
+function delAgendaPoint(i, pi) { agendaItems[i].points.splice(pi,1); renderAgenda(); }
+function addAgendaPoint(i)     { agendaItems[i].points.push('New point'); renderAgenda(); }
+
+// ── SYNC ─────────────────────────────────────────────────────────────────────
+function syncFromList() {
+  if (!spUrl()) { setStatus('offline', '○ Not inside SharePoint'); return; }
+  setStatus('connecting', '◌ Syncing...');
+  fetchFromList();
+}
+
+function fetchFromList() {
+  var path = "/_api/web/lists/getbytitle('"+SP_LIST+"')/items" +
+    "?$select=Id,Title,Pillar,PillarID,PillarOrder,PillarChampion,Project,Phase,ProjectOrder,TaskOrder,Done,Owner,Notes" +
+    "&$orderby=PillarOrder,ProjectOrder,TaskOrder&$top=500";
+  spGet(path, function(err, data) {
+    if (err) {
+      spConnected = false;
+      if (err.message && err.message.indexOf('404') !== -1) {
+        setStatus('error', '✕ List not found — run Seed-Lists.ps1 first');
+      } else if (err.message === 'timeout') {
+        setStatus('error', '✕ Connection timed out — using local data');
+      } else {
+        setStatus('offline', '○ Standalone — changes saved locally only');
+      }
+      return;
+    }
+    var items = data && data.value;
+    if (!items || !items.length) {
+      setStatus('error', '✕ List is empty — run Seed-Lists.ps1 to load data');
+      return;
+    }
+    pillars = buildFromItems(items);
+    spConnected = true;
+    setStatus('connected', '● Connected · AI_Committee · '+items.length+' tasks · '+new Date().toLocaleTimeString());
+    renderAll();
+  });
+}
+
+// ── EXPORT ────────────────────────────────────────────────────────────────────
+function exportDoc() {
+  var state = JSON.stringify({pillars:pillars, agendaItems:agendaItems, exported:Date.now()});
+  var tag = '<script>window._embeddedState='+state+';<\/script>';
+  var html = document.documentElement.outerHTML.replace('</head>', tag+'</head>');
+  var b = new Blob([html], {type:'text/html'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(b);
+  a.download = 'Carbon-Group-AI-Committee-'+new Date().toISOString().slice(0,10)+'.html';
+  a.click();
+}
+
+// ── RENDER ALL ────────────────────────────────────────────────────────────────
+function renderAll() {
+  renderOverview();
+  renderAgenda();
+  if (activeTab === 'tasks') renderTasks();
+}
+
+// ── EVENT DELEGATION ──────────────────────────────────────────────────────────
+function setupEvents() {
+  // Static tab buttons
+  var tabIds = ['overview','agenda','tasks'];
+  for (var ti = 0; ti < tabIds.length; ti++) {
+    (function(tab) {
+      var el = document.getElementById('tab-' + tab);
+      if (el) el.addEventListener('click', function() { showTab(tab); });
+    })(tabIds[ti]);
+  }
+  // Header buttons
+  var btnSync = document.getElementById('btnSync');
+  if (btnSync) btnSync.addEventListener('click', syncFromList);
+  var btnEdit = document.getElementById('btnEdit');
+  if (btnEdit) btnEdit.addEventListener('click', toggleEdit);
+  var btnExport = document.getElementById('btnExport');
+  if (btnExport) btnExport.addEventListener('click', exportDoc);
+
+  // Delegated CLICK handler
+  document.addEventListener('click', function(e) {
+    var el = e.target;
+    var depth = 0;
+    while (el && depth < 6) {
+      if (el.dataset && el.dataset.action) break;
+      el = el.parentElement;
+      depth++;
+    }
+    if (!el || !el.dataset || !el.dataset.action) return;
+    var action = el.dataset.action;
+    var pi  = el.dataset.pi  !== undefined ? +el.dataset.pi  : -1;
+    var pri = el.dataset.pri !== undefined ? +el.dataset.pri : -1;
+    var ti  = el.dataset.ti  !== undefined ? +el.dataset.ti  : -1;
+    var i   = el.dataset.i   !== undefined ? +el.dataset.i   : -1;
+
+    if (action === 'toggle-pillar')    { togglePillarSection(pi); }
+    else if (action === 'del-task')    { delTask(pi, pri, ti); }
+    else if (action === 'add-task')    { addTaskFromEl(pi, pri, el.dataset.prid); }
+    else if (action === 'del-project') { delProject(pi, pri); }
+    else if (action === 'toggle-add-proj') { toggleAddProj(el.dataset.id); }
+    else if (action === 'add-project') { addProject(pi, el.dataset.plid); }
+    else if (action === 'toggle-agenda')   { toggleAgenda(i); }
+    else if (action === 'del-agenda-item') { delAgendaItem(i); }
+    else if (action === 'add-agenda-item') { addAgendaItem(); }
+    else if (action === 'del-agenda-point') { delAgendaPoint(i, +el.dataset.pi); }
+    else if (action === 'add-agenda-point') { addAgendaPoint(i); }
+  });
+
+  // Delegated CHANGE handler (checkboxes + selects)
+  document.addEventListener('change', function(e) {
+    var el = e.target;
+    if (!el.dataset || !el.dataset.action) return;
+    if (el.dataset.action === 'toggle-task') {
+      toggleTask(+el.dataset.pi, +el.dataset.pri, +el.dataset.ti);
+    } else if (el.dataset.action === 'agenda-tag') {
+      var lm = {all:'All',p1:'Pillar 1: Dynamics',p2:'Pillar 2: Automation',p3:'Pillar 3: Government',p4:'Pillar 4: Technical'};
+      agendaItems[+el.dataset.i].tag = el.value;
+      agendaItems[+el.dataset.i].tagLabel = lm[el.value] || el.value;
+      renderAgenda();
+    }
+  });
+
+  // Delegated INPUT handler
+  document.addEventListener('input', function(e) {
+    var el = e.target;
+    if (!el.dataset || !el.dataset.action) return;
+    var action = el.dataset.action;
+    var i2  = el.dataset.i  !== undefined ? +el.dataset.i  : -1;
+    var pi2 = el.dataset.pi !== undefined ? +el.dataset.pi : -1;
+    if (action === 'task-text') {
+      pillars[pi2].projects[+el.dataset.pri].tasks[+el.dataset.ti].text = el.value;
+    } else if (action === 'champion-input') {
+      pillars[pi2].champion = el.value;
+    } else if (action === 'pillar-desc') {
+      pillars[pi2].desc = el.value;
+    } else if (action === 'agenda-num')   { agendaItems[i2].num = el.value; }
+    else if (action === 'agenda-time')    { agendaItems[i2].time = el.value; renderAgenda(); }
+    else if (action === 'agenda-title')   { agendaItems[i2].title = el.value; }
+    else if (action === 'agenda-point')   { agendaItems[i2].points[+el.dataset.pi] = el.value; }
+    else if (action === 'agenda-note')    { agendaItems[i2].note = el.value; }
+  });
+
+  // Delegated FOCUSOUT (blur-equivalent that bubbles)
+  document.addEventListener('focusout', function(e) {
+    var el = e.target;
+    if (el.dataset && el.dataset.action === 'champion-input') {
+      saveChampion(+el.dataset.pi);
+    }
+  });
+
+  // Delegated KEYDOWN (Enter in new-task inputs)
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    var el = e.target;
+    if (el.dataset && el.dataset.action === 'new-task-input') {
+      addTaskFromEl(+el.dataset.pi, +el.dataset.pri, el.dataset.prid);
+    }
+  });
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+(function init() {
+  if (window._embeddedState) {
+    pillars     = window._embeddedState.pillars;
+    agendaItems = window._embeddedState.agendaItems || agendaItems;
+    setStatus('offline', '○ Snapshot · '+new Date(window._embeddedState.exported).toLocaleDateString());
+    renderAll();
+    setupEvents();
+    return;
+  }
+
+  renderAll();
+  setupEvents();
+
+  if (!spUrl()) {
+    setStatus('offline', '○ Standalone — open inside SharePoint to connect');
+    return;
+  }
+  setStatus('connecting', '◌ Connecting to list...');
+  fetchFromList();
+})();
+</script>
+</body>
+</html>

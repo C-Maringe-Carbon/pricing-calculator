@@ -1,39 +1,38 @@
 {
-  "id": "e0f64a69-5c37-4d01-b094-703f2c0e5d80",
-  "alias": "PricingCalculatorWebPart",
+  "id": "3f8a2b1c-9d4e-47f0-8c5a-1b6d2e3f4a5b",
+  "alias": "CarbonAiCommitteeWebPart",
   "componentType": "WebPart",
   "version": "1.0.0",
   "manifestVersion": 2,
   "requiresCustomScript": false,
   "supportedHosts": [
-    "SharePointWebPart"
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab"
   ],
-  "supportsThemeVariants": false,
   "preconfiguredEntries": [
     {
-      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "groupId": "5c03119e-3074-46fd-976b-938ece98f29b",
       "group": {
         "default": "Other"
       },
       "title": {
-        "default": "Services Calculator"
+        "default": "AI Committee"
       },
       "description": {
-        "default": "Carbon Group Compliance Services Calculator — reads live pricing from the PricingServices SharePoint list."
+        "default": "Carbon Group AI Committee — 4 Pillars, Monthly Meetings, Living Roadmap"
       },
-      "officeFabricIconFontName": "Calculator",
-      "properties": {
-        "htmlFileUrl": ""
-      }
+      "officeFabricIconFontName": "Group",
+      "properties": {}
     }
   ],
   "loaderConfig": {
     "internalModuleBaseUrls": [],
-    "entryModuleId": "pricing-calculator-web-part",
+    "entryModuleId": "carbon-ai-committee-web-part",
     "scriptResources": {
-      "pricing-calculator-web-part": {
+      "carbon-ai-committee-web-part": {
         "type": "path",
-        "path": "pricing-calculator-web-part_5a6936f3820104791834.js"
+        "path": "carbon-ai-committee-web-part_775edbacb711417ac639.js"
       },
       "@microsoft/sp-core-library": {
         "type": "component",
@@ -43,6 +42,11 @@
       "@microsoft/sp-webpart-base": {
         "type": "component",
         "id": "974a7777-0990-4136-8fa6-95d80114c2e0",
+        "version": "1.18.2"
+      },
+      "@microsoft/sp-http": {
+        "type": "component",
+        "id": "c07208f0-ea3b-4c1a-9965-ac1b825211a6",
         "version": "1.18.2"
       }
     }

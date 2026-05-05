@@ -1,0 +1,9 @@
+Title,ItemNumber,Duration,PillarTag,Note
+Welcome & Housekeeping,01,5 min,All,Nathan chairs this section.
+Previous Actions Review,02,5 min,All,Champions confirm their own actions. Keep this tight — detail goes in pillar sections.
+Pillar 1: Dynamics CRM — Champion Presentation,03,15 min,Pillar 1: Dynamics,Champion presents. Nathan and group ask questions. Agree on any actions before moving on.
+Pillar 2: Process & System Automation — Champion Presentation,04,15 min,Pillar 2: Automation,Champion presents. Flag any cross-pillar dependencies clearly.
+Pillar 3: Government Agency Integration — Champion Presentation,05,15 min,Pillar 3: Government,Champion presents. Note that this pillar cannot fully proceed until Pillar 1 (Dynamics) has the job completion workflow in place.
+Pillar 4: Technical Know-How — Champion Presentation,06,15 min,Pillar 4: Technical,Champion presents. This pillar feeds directly into Pillar 2 — document review must precede automation.
+Cross-Pillar Issues & Decisions,07,10 min,All,Nathan facilitates. This is not a general discussion — it is for decisions only.
+Actions & Next Meeting,08,5 min,All,Keep this section tight. Every action must have a named owner and a date.

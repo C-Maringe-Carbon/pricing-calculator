@@ -1,0 +1,113 @@
+Title,Project,Pillar,Done
+Set up Dynamics sandbox environment,Dynamics CRM Build & Configuration,Dynamics CRM,No
+Define and build the client record schema (entities services contacts preferred window goals),Dynamics CRM Build & Configuration,Dynamics CRM,No
+Map all entity types: company trust individual SMSF — and configure accordingly,Dynamics CRM Build & Configuration,Dynamics CRM,No
+Connect SharePoint/OneDrive as the document layer,Dynamics CRM Build & Configuration,Dynamics CRM,No
+Define job record fields: job type status assigned staff queries deadlines completion state,Dynamics CRM Build & Configuration,Dynamics CRM,No
+Build the onboarding intake form (Content Snare equivalent — native to Dynamics),Dynamics CRM Build & Configuration,Dynamics CRM,No
+Test data flow: onboarding to client record to job record,Dynamics CRM Build & Configuration,Dynamics CRM,No
+Define what job ready to start means as a system state,Dynamics CRM Build & Configuration,Dynamics CRM,No
+Audit existing client records across all firms — what exists where it lives how clean it is,Client Data Audit & Migration,Dynamics CRM,No
+Identify which clients have entity structure preferred contact and prior year documents accessible,Client Data Audit & Migration,Dynamics CRM,No
+Define minimum data required per client for the Pre-Start Engine to function,Client Data Audit & Migration,Dynamics CRM,No
+Build migration plan to move existing client data into Dynamics cleanly,Client Data Audit & Migration,Dynamics CRM,No
+Identify clients who need to be contacted to fill in missing information,Client Data Audit & Migration,Dynamics CRM,No
+Plan rollout sequence: which firms go first and in what order,Client Data Audit & Migration,Dynamics CRM,No
+Build the Healthy Wealthy & Wise intake form in Dynamics (digital shareable with client),Healthy Wealthy & Wise — Dynamics Build,Dynamics CRM,No
+Configure separate completion for client and spouse/partner,Healthy Wealthy & Wise — Dynamics Build,Dynamics CRM,No
+Build the goal tracking view: business personal and family goals — visible to the advisor,Healthy Wealthy & Wise — Dynamics Build,Dynamics CRM,No
+Build the timeline view: 1yr 3yr 5yr 10yr goals side by side,Healthy Wealthy & Wise — Dynamics Build,Dynamics CRM,No
+Configure the shared board between advisor and client: both can see and update before meetings,Healthy Wealthy & Wise — Dynamics Build,Dynamics CRM,No
+Build the action tracking system: actions from each meeting assigned to client or advisor with due dates,Healthy Wealthy & Wise — Dynamics Build,Dynamics CRM,No
+Make action status visible to both parties (like Planner in Teams),Healthy Wealthy & Wise — Dynamics Build,Dynamics CRM,No
+Build the meeting history log: what was discussed decided and what is outstanding,Healthy Wealthy & Wise — Dynamics Build,Dynamics CRM,No
+Configure advisor prompts: system suggests follow-up points between meetings based on open actions,Healthy Wealthy & Wise — Dynamics Build,Dynamics CRM,No
+Build cross-referral tracking and opportunity flag system,Healthy Wealthy & Wise — Dynamics Build,Dynamics CRM,No
+Build the referral dashboard for partners: who has been referred to which division what was the result,Healthy Wealthy & Wise — Dynamics Build,Dynamics CRM,No
+Build the preferred completion window field into client onboarding,Job Scheduling Engine,Process & System Automation,No
+Build the job scheduling logic: generate the next job instance based on services and window,Job Scheduling Engine,Process & System Automation,No
+Configure the trigger: 30 days before window opens automatically initiate the Pre-Start process,Job Scheduling Engine,Process & System Automation,No
+Build the production calendar view: upcoming jobs status and assigned team members,Job Scheduling Engine,Process & System Automation,No
+Configure alerts: notify pod leaders when a job has not been initiated within the trigger window,Job Scheduling Engine,Process & System Automation,No
+Test scheduling logic across all job types and entity combinations,Job Scheduling Engine,Process & System Automation,No
+For existing clients: backfill preferred window data and generate first scheduled jobs,Job Scheduling Engine,Process & System Automation,No
+Build the checklist generation logic: map job type and entity type to required documents,AI-Generated Personalised Client Checklists,Process & System Automation,No
+Integrate prior year data: pull what was requested and received last year,AI-Generated Personalised Client Checklists,Process & System Automation,No
+Build the smart additions layer: flag known issues from prior year,AI-Generated Personalised Client Checklists,Process & System Automation,No
+Design the client-facing checklist format — clear simple itemised,AI-Generated Personalised Client Checklists,Process & System Automation,No
+Build the automated email/notification with deadline and window commitment language,AI-Generated Personalised Client Checklists,Process & System Automation,No
+Test across: individual company trust and SMSF combinations,AI-Generated Personalised Client Checklists,Process & System Automation,No
+Build the response tracking system: log what has been received and what is outstanding,AI-Generated Personalised Client Checklists,Process & System Automation,No
+Build the query tracking system in Dynamics: each query is a record with status,Client Query & Document Collection System,Process & System Automation,No
+Build the document intake portal: clients upload via a link into SharePoint (not email),Client Query & Document Collection System,Process & System Automation,No
+Configure automatic document tagging: linked to the relevant job and query,Client Query & Document Collection System,Process & System Automation,No
+Build the partial response logic: only resend unanswered queries,Client Query & Document Collection System,Process & System Automation,No
+Configure automatic reminders if no response after X days,Client Query & Document Collection System,Process & System Automation,No
+Build the job status update: all queries resolved — ready to start,Client Query & Document Collection System,Process & System Automation,No
+Build team notification: alert accountant when job moves to ready to start,Client Query & Document Collection System,Process & System Automation,No
+Ensure all responses are visible to team — not locked in one inbox,Client Query & Document Collection System,Process & System Automation,No
+Test full loop: send to respond to partial to follow up to complete to job unlocks,Client Query & Document Collection System,Process & System Automation,No
+Build the pre-start validation logic: check all required documents against the checklist,Pre-Start Validation Check,Process & System Automation,No
+Cross-reference received documents against prior year requirements,Pre-Start Validation Check,Process & System Automation,No
+Flag any documents that appear missing or incomplete,Pre-Start Validation Check,Process & System Automation,No
+Generate a pre-start summary for the accountant: what we have what is confirmed any flags,Pre-Start Validation Check,Process & System Automation,No
+Block job from entering production queue until pre-start check is passed,Pre-Start Validation Check,Process & System Automation,No
+Build the override: allow pod leader to manually approve a job if there is a valid reason,Pre-Start Validation Check,Process & System Automation,No
+Build document compilation logic: bundle all job documents in correct order by entity type,Document Compilation Signing & Client Output,Process & System Automation,No
+Build cover letter generator: summarise tax outcomes refunds/payables key points for the year,Document Compilation Signing & Client Output,Process & System Automation,No
+Build the proactive insights section: flag payroll tax proximity FBT Div 7A and other common issues,Document Compilation Signing & Client Output,Process & System Automation,No
+Integrate signing infrastructure into our own stack (not a third-party cost),Document Compilation Signing & Client Output,Process & System Automation,No
+Configure multi-signature routing: different signatories for different entities in the same group,Document Compilation Signing & Client Output,Process & System Automation,No
+Build the signing reminder system: automated reminders until all documents are signed,Document Compilation Signing & Client Output,Process & System Automation,No
+Track signing status in Dynamics: visible to the full team,Document Compilation Signing & Client Output,Process & System Automation,No
+Notify client manager when signing is complete and lodgement is ready,Document Compilation Signing & Client Output,Process & System Automation,No
+Build the quarterly meeting scheduler: automatically suggest meeting dates based on client preference,Quarterly Meeting & Advisory System,Process & System Automation,No
+Build the advisor prep dashboard: surfaces client goals open actions recent job outcomes and flags,Quarterly Meeting & Advisory System,Process & System Automation,No
+Build the shared agenda tool: client and advisor can both add agenda items before the meeting,Quarterly Meeting & Advisory System,Process & System Automation,No
+Build the post-meeting summary: advisor logs key points new actions are created and assigned,Quarterly Meeting & Advisory System,Process & System Automation,No
+Configure the follow-up prompt: advisor reminded to follow up on client actions 1-2 times between meetings,Quarterly Meeting & Advisory System,Process & System Automation,No
+Train all partners and pod leaders on the advisory model and how to run the meetings,Quarterly Meeting & Advisory System,Process & System Automation,No
+Map all lodgement types: tax returns (individual company trust SMSF) BAS payroll ASIC,ATO Lodgement Automation,Integration with Government Agencies,No
+Define the trigger: once all signatures received automatically prepare lodgement package,ATO Lodgement Automation,Integration with Government Agencies,No
+Build the lodgement trigger in Dynamics: connects to ATO portal or intermediary,ATO Lodgement Automation,Integration with Government Agencies,No
+Configure lodgement status tracking: pending submitted accepted rejected — visible in Dynamics,ATO Lodgement Automation,Integration with Government Agencies,No
+Build the error handling flow: if ATO rejects flag to the relevant accountant with reason,ATO Lodgement Automation,Integration with Government Agencies,No
+Build the lodgement confirmation notification: notify client and update job status to complete,ATO Lodgement Automation,Integration with Government Agencies,No
+Build integration to pull ATO account balances and debt status per client,ATO Compliance Monitoring & Debt Alerts,Integration with Government Agencies,No
+Configure alerts: notify client manager when a client has an outstanding ATO debt or payment plan,ATO Compliance Monitoring & Debt Alerts,Integration with Government Agencies,No
+Surface ATO correspondence and notices into the client record in Dynamics,ATO Compliance Monitoring & Debt Alerts,Integration with Government Agencies,No
+Build the proactive client notification: alert clients to upcoming payment obligations before they are due,ATO Compliance Monitoring & Debt Alerts,Integration with Government Agencies,No
+Map all ASIC obligations per client: annual reviews changes of officeholders registered addresses,ASIC & Other Agency Integrations,Integration with Government Agencies,No
+Build automated ASIC annual review reminder and lodgement workflow,ASIC & Other Agency Integrations,Integration with Government Agencies,No
+Identify any other agency integrations required (state revenue offices payroll tax portals),ASIC & Other Agency Integrations,Integration with Government Agencies,No
+Build the compliance calendar: shows all upcoming lodgement deadlines across all agencies for all clients,ASIC & Other Agency Integrations,Integration with Government Agencies,No
+Document the full workflow for: Individual Tax Return,Workflow Documentation — All Core Job Types,Technical Know-How,No
+Document the full workflow for: Company Tax Return + Financials,Workflow Documentation — All Core Job Types,Technical Know-How,No
+Document the full workflow for: Trust Tax Return + Financials,Workflow Documentation — All Core Job Types,Technical Know-How,No
+Document the full workflow for: BAS Lodgement,Workflow Documentation — All Core Job Types,Technical Know-How,No
+Document the full workflow for: SMSF Annual Return,Workflow Documentation — All Core Job Types,Technical Know-How,No
+Document the full workflow for: Payroll processing,Workflow Documentation — All Core Job Types,Technical Know-How,No
+For each job type: list every document required by entity type,Workflow Documentation — All Core Job Types,Technical Know-How,No
+For each job type: define what complete information looks like before production starts,Workflow Documentation — All Core Job Types,Technical Know-How,No
+For each job type: document the full review checklist (what reviewers currently check),Workflow Documentation — All Core Job Types,Technical Know-How,No
+Identify variations: what changes based on client complexity or special circumstances,Workflow Documentation — All Core Job Types,Technical Know-How,No
+Define the first-level AI review checklist for each job type,AI First-Level Review System,Technical Know-How,No
+For tax returns: check figures reconcile prior year comparisons within range all entities included,AI First-Level Review System,Technical Know-How,No
+For financials: check balance sheet balances P&L is complete comparatives are correct,AI First-Level Review System,Technical Know-How,No
+For BAS: check GST figures reconcile to coding period is correct lodgement date noted,AI First-Level Review System,Technical Know-How,No
+Build the AI review layer: runs automatically when accountant marks job as complete,AI First-Level Review System,Technical Know-How,No
+Generate an AI review report: list of checks passed any flags for human attention,AI First-Level Review System,Technical Know-How,No
+Build the workflow gate: job cannot go to human review until AI review is complete,AI First-Level Review System,Technical Know-How,No
+For tax compliance jobs: compare final outcome to tax planning engagement — flag if more than 5% variance,AI First-Level Review System,Technical Know-How,No
+Test AI review across all job types and validate accuracy with a senior accountant,AI First-Level Review System,Technical Know-How,No
+Define the technical review checklist: accuracy completeness compliance,Human Review Workflow (Technical + Commercial),Technical Know-How,No
+Define the commercial review checklist: best tax position missed opportunities client flags,Human Review Workflow (Technical + Commercial),Technical Know-How,No
+Build the two-stage review workflow in Dynamics: technical to commercial to approved,Human Review Workflow (Technical + Commercial),Technical Know-How,No
+Configure routing: simple jobs go to client manager complex jobs escalate to pod leader or partner,Human Review Workflow (Technical + Commercial),Technical Know-How,No
+Build the feedback loop: reviewer sends job back with specific comments not just a general rejection,Human Review Workflow (Technical + Commercial),Technical Know-How,No
+Track review turnaround time: flag jobs sitting in review queue for more than X days,Human Review Workflow (Technical + Commercial),Technical Know-How,No
+Build the approval gate: job cannot be compiled for client until both reviews are complete,Human Review Workflow (Technical + Commercial),Technical Know-How,No
+Configure AI-generated meeting prompts: based on Healthy Wealthy & Wise data suggest relevant topics,AI-Assisted Meeting Preparation & Cross-Referral Prompts,Technical Know-How,No
+Build the cross-referral prompt layer: surface opportunities to refer into other divisions based on client goals,AI-Assisted Meeting Preparation & Cross-Referral Prompts,Technical Know-How,No
+Build the gap analysis: which clients have only one service? Flag as expansion opportunities,AI-Assisted Meeting Preparation & Cross-Referral Prompts,Technical Know-How,No
+Build the revenue attribution model: track cross-referral revenue back to the originating advisor,AI-Assisted Meeting Preparation & Cross-Referral Prompts,Technical Know-How,No

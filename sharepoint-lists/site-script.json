@@ -1,0 +1,113 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/site-design-script-actions.schema.json",
+  "actions": [
+    {
+      "verb": "createSPList",
+      "listName": "AI_Committee",
+      "templateType": 100,
+      "subactions": [
+        {
+          "verb": "setDescription",
+          "description": "Carbon Group AI Committee — task tracking across 4 pillars"
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "Pillar",
+          "internalName": "Pillar",
+          "isRequired": false,
+          "addToDefaultView": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "PillarID",
+          "internalName": "PillarID",
+          "isRequired": false,
+          "addToDefaultView": false
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Number",
+          "displayName": "PillarOrder",
+          "internalName": "PillarOrder",
+          "isRequired": false,
+          "addToDefaultView": false
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "PillarChampion",
+          "internalName": "PillarChampion",
+          "isRequired": false,
+          "addToDefaultView": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "Project",
+          "internalName": "Project",
+          "isRequired": false,
+          "addToDefaultView": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "Phase",
+          "internalName": "Phase",
+          "isRequired": false,
+          "addToDefaultView": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Number",
+          "displayName": "ProjectOrder",
+          "internalName": "ProjectOrder",
+          "isRequired": false,
+          "addToDefaultView": false
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Number",
+          "displayName": "TaskOrder",
+          "internalName": "TaskOrder",
+          "isRequired": false,
+          "addToDefaultView": false
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Boolean",
+          "displayName": "Done",
+          "internalName": "Done",
+          "isRequired": false,
+          "addToDefaultView": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "DateTime",
+          "displayName": "CompletedDate",
+          "internalName": "CompletedDate",
+          "isRequired": false,
+          "addToDefaultView": false
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Text",
+          "displayName": "Owner",
+          "internalName": "Owner",
+          "isRequired": false,
+          "addToDefaultView": true
+        },
+        {
+          "verb": "addSPField",
+          "fieldType": "Note",
+          "displayName": "Notes",
+          "internalName": "Notes",
+          "isRequired": false,
+          "addToDefaultView": false
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

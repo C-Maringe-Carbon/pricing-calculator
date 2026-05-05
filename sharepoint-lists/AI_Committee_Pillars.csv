@@ -1,0 +1,5 @@
+Title,PillarTag,Champion,Description
+Dynamics CRM,p1,TBD,"Build and configure Microsoft Dynamics as the single source of truth for all client data, job records, and communications. Everything else in the transformation depends on this foundation being correct."
+Process & System Automation,p2,TBD,"Automate the end-to-end production workflow — from job scheduling and document collection through to client signing and lodgement. This pillar directly addresses the capacity constraint and eliminates the manual coordination burden on client managers."
+Integration with Government Agencies,p3,TBD,"Build and maintain the connections between our systems and external government bodies — primarily the ATO — to enable automated lodgement, real-time status updates, and compliance monitoring."
+Technical Know-How,p4,TBD,"Build the AI layer that assists with the actual production of accounting and bookkeeping work — reviewing work for accuracy, checking for the best tax outcome, and eventually drafting components of standard compliance work."

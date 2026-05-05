@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "3f8a2b1c-9d4e-47f0-8c5a-1b6d2e3f4a5b",
+  "alias": "CarbonAiCommitteeWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab"],
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-938ece98f29b",
+      "group": { "default": "Other" },
+      "title": { "default": "AI Committee" },
+      "description": { "default": "Carbon Group AI Committee — 4 Pillars, Monthly Meetings, Living Roadmap" },
+      "officeFabricIconFontName": "Group",
+      "properties": {}
+    }
+  ]
+}
